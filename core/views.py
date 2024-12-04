@@ -19,7 +19,7 @@ class FileUploadView(APIView):
     )
     def post(self, request):
         up_file = request.FILES['file']
-        data = []
+        ret = []
         wb = load_workbook(up_file)
         sheet_names = wb.get_sheet_names()
         if not len(sheet_names):
@@ -42,7 +42,8 @@ class FileUploadView(APIView):
             data.umts = True if 'umts' in technology else False
             data.status = s
             data.save()
-            serializer = DataSerializer(data)
+            ret.append(data)
+        serializer = DataSerializer(ret, many=True)
         return Response(serializer.data, status.HTTP_201_CREATED)
 
 
