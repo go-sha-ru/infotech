@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Data</title>
+</head>
+<style>
+    html, body {
+    height: 100%;
+}
+body {
+    margin: 0;
+}
+main {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+table {
+    border-collapse: collapse;
+}
+
+td, th {
+    border: 1px solid gray;
+    padding: 1em;
+}
+.green {
+    color: green;
+}
+.red {
+    color: red;
+}
+</style>
+<body>
+
+<main>
+    <table>
+    <thead>
+    <tr>
+        <th>ne</th>
+        <th>address</th>
+        <th>coordinates</th>
+        <th>technology</th>
+        <th>status</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for d in data %}
+        <tr>
+        <td>{{ d.ne }}</td>
+        <td>{{ d.address }}</td>
+        <td>{{ d.coordinates }}</td>
+        <td>{{ d.technology }}</td>
+        <td class="{{ d.status|yesno:"green,red" }}">{{ d.status|yesno:"Вкл,Выкл" }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+    </table>
+</main>
+</body>
+</html>
